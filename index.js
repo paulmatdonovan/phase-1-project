@@ -2,7 +2,7 @@
 
 
 
-fetch('https://fakestoreapi.com/products/category/electronics')
+fetch('http://localhost:3000/menswear')
     .then(res => res.json())
     .then((products) => {
 
@@ -26,6 +26,10 @@ fetch('https://fakestoreapi.com/products/category/electronics')
         }
     });
 
-
+const menswearData =
+    fetch('http://localhost:3000/menswear')
+        .then(res => console.log(res))
+// console.log('I have fetched')
+// this is a GET request 
 
 
