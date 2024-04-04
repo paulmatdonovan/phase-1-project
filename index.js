@@ -1,18 +1,26 @@
 
 function renderOneProduct(product) {
-    // /build product 
+    // build product 
     let card = document.createElement('li')
     card.className = 'card'
     card.innerHTML = `
-<img src="${product.image}">
-<div class="content">
+    <div class="content">
+    <img src="${product.image}">
 <h4>${product.title}</h4>
 <p>${product.description}<p>
-</div>
 <div class="buttons">
-<button> Add to Cart</button>
+<button id="addToCart"> Add to Cart </button>
+</div>
 </div>
 `
+    card.querySelector('#addToCart').addEventListener('click', () => {
+
+        console.log('Item added to cart!');
+        alert('Item added to cart!');
+
+    });
+
+
     document.querySelector('#product-list').appendChild(card)
 }
 
@@ -24,21 +32,41 @@ function getAllProducts() {
 
 }
 
+
 function initialise() {
     getAllProducts()
 }
-initialise()
+initialise();
 
-document.getElementById("searchInput").addEventListener('input', function () {
-    const filter = this.value.toUpperCase();
-    const clothingList = document.getElementById("clothingList")
-    const items = clothingList.getElementsByTagName("li");
-    for (let i = 0; i < items.length; i++) {
-        if (text.toUpperCase().indexOf(filter) > -1) {
-            items.style.display = "";
-        } else {
-            items.style.display = "none";
-        }
-    }
-})
 
+
+// Search functionality
+function searchProducts(query) {
+    // Convert the query to lowercase for case-insensitive search
+    const searchTerm = query.toLowerCase();
+
+    // Clear existing products from the list
+    const productList = document.querySelector('#product-list');
+    productList.innerHTML = '';
+
+    // Fetch products matching the search query
+    fetch('http://localhost:3000/menswear')
+        .then(res => res.json())
+        .then(menswear => {
+            menswear.forEach(product => {
+                // Check if the product's title contains the search term
+                if (product.title.toLowerCase().includes(searchTerm)) {
+                    renderOneProduct(product);
+                }
+            });
+        });
+}
+
+// Event listener for search input
+document.querySelector('#search-input').addEventListener('input', event => {
+    const searchQuery = event.target.value.trim(); // Trim any leading or trailing whitespace
+    searchProducts(searchQuery);
+});
+
+// Initialize the page
+initialize();
