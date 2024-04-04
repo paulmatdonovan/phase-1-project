@@ -6,16 +6,32 @@
     align-items: center;
 } */
 
-.content {
-    max-width: 400;
+#container {
+    max-width: 1300px;
     margin: auto;
-    display: block;
-    flex-direction: row;
-    align-items: center;
+
+
+
 }
 
+.content {
+    /* li { */
+    border: 1px solid blue;
+    max-width: 400px;
+    height: 700px;
+    padding: 27px;
+    margin: 14px;
+    gap: 10px;
+
+    background-color: beige;
+
+
+}
+
+.card {}
+
 .card img {
-    width: 400px;
+    width: 300px;
     /* max-width: 1100;
     margin: auto;
     display: flex;
@@ -25,6 +41,10 @@
 
 ul {
     list-style-type: none;
+    display: flex;
+    flex-direction: row;
+
+
 }
 
 .buttons {

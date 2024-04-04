@@ -1,3 +1,7 @@
+// get elements by their ID
+const searchInput = document.getElementById('searchInput');
+
+
 
 function renderOneProduct(product) {
     // build product 
@@ -40,14 +44,17 @@ initialise();
 
 
 
+
 // Search functionality
 function searchProducts(query) {
-    // Convert the query to lowercase for case-insensitive search
+    // This converts the query to lowercase for case-insensitive search
     const searchTerm = query.toLowerCase();
 
-    // Clear existing products from the list
+    // this clears existing products from the list
     const productList = document.querySelector('#product-list');
-    productList.innerHTML = '';
+    productList.innerHTML = ''
+
+
 
     // Fetch products matching the search query
     fetch('http://localhost:3000/menswear')
@@ -69,4 +76,4 @@ document.querySelector('#search-input').addEventListener('input', event => {
 });
 
 // Initialize the page
-initialize();
+// initialize();
