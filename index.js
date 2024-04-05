@@ -1,7 +1,3 @@
-// get elements by their ID
-const searchInput = document.getElementById('searchInput');
-
-
 
 function renderOneProduct(product) {
     // build product 
@@ -43,37 +39,33 @@ function initialise() {
 initialise();
 
 
-
-
 // Search functionality
-function searchProducts(query) {
-    // This converts the query to lowercase for case-insensitive search
-    const searchTerm = query.toLowerCase();
+// event listener uses the input value 
+document.getElementById('search-input').addEventListener('input', event => {
+    const searchQuery = event.target.value.trim().toLowerCase();
+    // Trim any leading or trailing whitespace
+    console.log(searchQuery);
 
-    // this clears existing products from the list
-    const productList = document.querySelector('#product-list');
-    productList.innerHTML = ''
-
-
-
-    // Fetch products matching the search query
-    fetch('http://localhost:3000/menswear')
-        .then(res => res.json())
-        .then(menswear => {
-            menswear.forEach(product => {
-                // Check if the product's title contains the search term
-                if (product.title.toLowerCase().includes(searchTerm)) {
-                    renderOneProduct(product);
-                }
-            });
-        });
-}
-
-// Event listener for search input
-document.querySelector('#search-input').addEventListener('input', event => {
-    const searchQuery = event.target.value.trim(); // Trim any leading or trailing whitespace
     searchProducts(searchQuery);
 });
 
-// Initialize the page
-// initialize();
+
+
+// Event listener for search input
+document.getElementById('search-input').addEventListener('submit', event => {
+    const searchQuery = event.target.value.trim();
+    console.log(searchQuery)// Trim any leading or trailing whitespace
+    searchProducts(searchQuery);
+});
+function searchProducts(query) {
+    fetch('http://localhost:3000/menswear')
+        .then(res => res.json())
+        .then(menswear => {
+            const filteredProducts = menswear.filter(product => product.title.toLowerCase().includes(query));
+            const productList = document.querySelector('#product-list');
+            productList.innerHTML = ''; // Clear existing products
+            filteredProducts.forEach(product => renderOneProduct(product)); // Render filtered products
+        });
+}
+
+
