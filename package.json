@@ -1,0 +1,16 @@
+{
+  "name": "phase-1-project",
+  "version": "1.0.0",
+  "description": "Menswear Store Summary This is an e-commerce store displaying quality menswear items for sale MVP Minimum Viable Product A single-page web application where users can browse through images of the latest menswear products for sale Users are encouraged to sort through the items via the search filter and sign up as frequent users User Stories As a user, I want to be able to browse through all items and click on them for more detail On page load, a minimum of items of clothing will load. The user will be able to see: Image Name material Description An add to cart button This meets the criteria: “Your app must be an HTML/CSS/JS frontend that accesses data from a public API or from a db.json file using JSON-server. Your API or db.json should return a collection of at least 5 objects with each object having at least 3 attributes.”",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "json-server": "^1.0.0-alpha.23"
+  }
+}

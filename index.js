@@ -1,11 +1,19 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+
+
+    console.log("DOM fully loaded and parsed");
+
+
+
+});
 
 function renderOneProduct(product) {
     // build product 
     let card = document.createElement('li')
     card.className = 'card'
     card.innerHTML = `
-    <div class="content">
-    <img src="${product.image}">
+<div class="content">
+<img src="${product.image}">
 <h4>${product.title}</h4>
 <p>${product.description}<p>
 <div class="buttons">
@@ -37,6 +45,8 @@ function initialise() {
     getAllProducts()
 }
 initialise();
+
+
 
 
 // Search functionality
