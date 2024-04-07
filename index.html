@@ -13,6 +13,22 @@
 
 <body>
     <h2 class="heading">Expanse</h2>
+    <header>
+        <h3>Product Filter</h3>
+        <div class="search-box">
+            <form action="" onsubmit="return false">
+                <input type="text" id="search" placeholder="Search Product">
+
+            </form>
+            <div class="filter-box">
+                <a href="#" class="btn active" data-filter="all">All</a>
+                <a href="#" class="btn" data-filter="shirts">Shirts</a>
+                <a href="#" class="btn" data-filter="jackets">Jackets</a>
+                <a href="#" class="btn" data-filter="pants">Pants</a>
+
+            </div>
+        </div>
+    </header>
     <div id="container">
         <!-- contains the products added from JSON server -->
         <ul id="product-list" class="cards">
@@ -24,8 +40,10 @@
 
     <div class="clothes-search">
         <h2>Search Clothing Items</h2>
+
         <input type="text" id="search-input" placeholder="Search for clothing items...">
         <button id="searchButton">Search</button>
+
     </div>
 
 

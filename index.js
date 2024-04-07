@@ -1,11 +1,3 @@
-document.addEventListener("DOMContentLoaded", (event) => {
-
-
-    console.log("DOM fully loaded and parsed");
-
-
-
-});
 
 function renderOneProduct(product) {
     // build product 
@@ -14,7 +6,7 @@ function renderOneProduct(product) {
     card.innerHTML = `
 <div class="content">
 <img src="${product.image}">
-<h4>${product.title}</h4>
+<h4 id="store-product">${product.title}</h4>
 <p>${product.description}<p>
 <div class="buttons">
 <button id="addToCart"> Add to Cart </button>
@@ -44,38 +36,65 @@ function getAllProducts() {
 function initialise() {
     getAllProducts()
 }
+// Initialize the page
 initialise();
 
 
-
-
 // Search functionality
-// event listener uses the input value 
-document.getElementById('search-input').addEventListener('input', event => {
-    const searchQuery = event.target.value.trim().toLowerCase();
-    // Trim any leading or trailing whitespace
-    console.log(searchQuery);
-
-    searchProducts(searchQuery);
-});
-
-
-
-// Event listener for search input
-document.getElementById('search-input').addEventListener('submit', event => {
-    const searchQuery = event.target.value.trim();
-    console.log(searchQuery)// Trim any leading or trailing whitespace
-    searchProducts(searchQuery);
-});
 function searchProducts(query) {
+    // Convert the query to lowercase for case-insensitive search
+    const searchWords = query.toLowerCase();
+
+    // Clear existing products from the list
+    const productList = document.querySelector('#product-list');
+    productList.innerHTML = '';
+
+    // Fetch products matching the search query
     fetch('http://localhost:3000/menswear')
         .then(res => res.json())
         .then(menswear => {
-            const filteredProducts = menswear.filter(product => product.title.toLowerCase().includes(query));
-            const productList = document.querySelector('#product-list');
-            productList.innerHTML = ''; // Clear existing products
-            filteredProducts.forEach(product => renderOneProduct(product)); // Render filtered products
+            menswear.forEach(product => {
+                // Check if the product's title contains the search term
+                if (product.title.toLowerCase().includes(searchWords)) {
+                    renderOneProduct(product);
+                }
+            });
         });
 }
 
+// Event listener for search input
+document.querySelector('#search-input').addEventListener('input', event => {
+    const searchQuery = event.target.value.trim(); // Trim any leading or trailing whitespace
+    searchProducts(searchQuery);
+});
 
+
+
+// Product filter 
+const btns = document.querySelectorAll(".btn");
+const storeProducts = document.querySelectorAll("#store-product");
+console.log(storeProducts)
+
+for (i = 0; i < btns.length; i++) {
+    btns[i].addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const filter = e.target.dataset.filter;
+        // console.log(filter)
+        storeProducts.forEach((product) => {
+            if (filter === "all") {
+                product.style.display = "block"
+            } else {
+                if (product.classList.contains(filter)) {
+                    product.style.display = "block"
+
+                } else {
+                    product.style.display = "none"
+
+                }
+            }
+        })
+
+
+    })
+}
