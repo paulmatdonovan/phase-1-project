@@ -1,3 +1,5 @@
+const searchForm = document.querySelector(".search")
+
 
 function renderOneProduct(product) {
     // build product 
@@ -27,7 +29,9 @@ function renderOneProduct(product) {
 // fetch request 
 
 function getAllProducts() {
-    fetch('http://localhost:3000/menswear')
+    let uri = 'http://localhost:3000/menswear';
+
+    fetch(uri)
         .then(res => res.json())
         .then(menswear => menswear.forEach(product => renderOneProduct(product)))
 
@@ -99,5 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         })
     }
+
     initialise();
 });

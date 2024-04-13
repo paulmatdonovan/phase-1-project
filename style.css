@@ -7,11 +7,24 @@ body {
     font-family: 'Montserrat';
 }
 
+.header img {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background: #555;
+}
+
+.header h1 {
+    position: relative;
+    top: 18px;
+    left: 10px;
+}
+
 .heading {
     text-align: center;
     margin: auto;
     max-width: 1100px;
-    font-size: 35px;
+    font-size: 45px;
     color: steelblue;
 
 }
@@ -19,7 +32,7 @@ body {
 .clothes-search {
     text-align: center;
     margin: 0 auto;
-    max-width: 1100;
+    max-width: 1000;
     /* margin-bottom: 150px; */
     padding: 100px;
     font-size: 18px;
@@ -40,7 +53,7 @@ body {
     /* li { */
     border: 1px solid blue;
     max-width: 400px;
-    height: 600px;
+    height: 700px;
     padding: 27px;
     margin: 14px;
     gap: 10px;
@@ -49,7 +62,7 @@ body {
 
 }
 
-.card {}
+/* .card {} */
 
 .card img {
     max-width: 400px;
@@ -72,4 +85,25 @@ ul {
 
 .buttons {
     margin: 7px 0 7px 0;
+}
+
+.filter-box {
+    margin: 40px auto;
+    text-align: center;
+    padding: 15px 0 15px;
+
+}
+
+#logo {
+    max-height: 150px;
+}
+
+.btn {
+    background-color: rgb(68, 156, 190);
+    color: rgb(246, 245, 242);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 14px;
 }
