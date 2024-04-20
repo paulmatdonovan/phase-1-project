@@ -29,7 +29,7 @@ function renderOneProduct(product) {
 // fetch request 
 
 function getAllProducts() {
-    let uri = 'http://localhost:3000/menswear';
+    let uri = 'https://json-server-template-hn7g.onrender.com/menswear';
 
     fetch(uri)
         .then(res => res.json())
@@ -53,7 +53,7 @@ function searchProducts(query) {
     productList.innerHTML = '';
 
     // Fetch products matching the search query
-    fetch('http://localhost:3000/menswear')
+    fetch('https://json-server-template-hn7g.onrender.com/menswear')
         .then(res => res.json())
         .then(menswear => {
             menswear.forEach(product => {
