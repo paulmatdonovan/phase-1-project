@@ -10,6 +10,7 @@ function renderOneProduct(product) {
 <img src="${product.image}">
 <h4 id="store-product">${product.title}</h4>
 <p id="store-product">${product.description}<p>
+<h2 id="store-product">$ ${product.price}</h2>
 <div class="buttons">
 <button id="addToCart">Add to Cart</button>
 </div>
