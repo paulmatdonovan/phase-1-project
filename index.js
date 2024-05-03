@@ -7,7 +7,7 @@ function renderOneProduct(product) {
     card.className = 'card'
     card.innerHTML = `
 <div class="content">
-<img src="${product.image}">
+<img id="photo" src="${product.image}">
 <h4 id="store-product">${product.title}</h4>
 <p id="store-product">${product.description}<p>
 <h2 id="store-product">$ ${product.price}</h2>
@@ -106,4 +106,33 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     initialise();
+
+
 });
+
+
+// create a mouseover event
+// const cardList = document.querySelectorAll(".card");
+
+// cardList.forEach(card => {
+//     const img = card.querySelector("img");
+//     img.addEventListener("mouseover", (e) => {
+//         console.log(e)
+//         e.target.style.height = "500px";
+//         e.target.style.width = "500px";
+//     });
+// });
+
+const newsletterForm = document.getElementById('newsletter-form');
+newsletterForm.addEventListener('submit', function (event) {
+    event.preventDefault();
+    const emailData = document.getElementById('email-input');
+    const email = emailData.value;
+
+    handleSubscription(email)
+})
+
+function handleSubscription(email) {
+    alert('Your email has been added to our list!')
+
+}
