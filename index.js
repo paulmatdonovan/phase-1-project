@@ -1,5 +1,6 @@
 const searchForm = document.querySelector(".search")
-
+let products = null;
+const productList = document.getElementById('product-list');
 
 function renderOneProduct(product) {
     // build product 
@@ -30,77 +31,87 @@ function renderOneProduct(product) {
 // fetch request 
 
 function getAllProducts() {
-    let uri = 'https://json-server-template-hn7g.onrender.com/menswear';
+    let url = 'http://localhost:3000/menswear';
 
-    fetch(uri)
+    fetch(url)
         .then(res => res.json())
-        .then(menswear => menswear.forEach(product => renderOneProduct(product)))
+        .then(menswear => {
+            products = menswear;
+            menswear.forEach(product => renderOneProduct(product))
+        })
 
 }
-
+// Initialize the page
 
 function initialise() {
     getAllProducts()
 }
-// Initialize the page
 
-// Search functionality
+
+// Search feature
 function searchProducts(query) {
-    // Convert the query to lowercase for case-insensitive search
+    // Convert the query to lowercase 
     const searchWords = query.toLowerCase();
-
     // Clear existing products from the list
-    const productList = document.getElementById('product-list');
+
     productList.innerHTML = '';
 
     // Fetch products matching the search query
-    fetch('https://json-server-template-hn7g.onrender.com/menswear')
-        .then(res => res.json())
-        .then(menswear => {
-            menswear.forEach(product => {
-                // Check if the product's title contains the search term
-                if (product.title.toLowerCase().includes(searchWords)) {
-                    renderOneProduct(product);
-                }
-            });
-        });
+    // fetch('https://json-server-template-hn7g.onrender.com/menswear')
+    //     .then(res => res.json())
+    //     .then(menswear => {
+
+    products.forEach(product => {
+        // Check if the product's title contains the search term
+        if (product.title.toLowerCase().includes(searchWords)) {
+            renderOneProduct(product);
+        }
+    });
+
 }
 
 // Event listener for search input
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#search-input').addEventListener('input', event => {
         const searchQuery = event.target.value.trim();
-        // Trim any leading or trailing whitespace
+        // Trim any  whitespace
         searchProducts(searchQuery);
     });
-
 
 
     // Product filter 
     const btns = document.querySelectorAll(".btn");
 
-
     for (i = 0; i < btns.length; i++) {
         btns[i].addEventListener("click", (e) => {
             e.preventDefault();
-
             const filter = e.target.dataset.filter;
-            const storeProducts = Array.from(document.querySelectorAll(".card"));
-
-            // console.log(filter)
-            storeProducts.forEach((product) => {
-                if (filter === "all") {
-                    product.style.display = "block"
+            // const storeProducts = Array.from(document.querySelectorAll(".card"));
+            productList.innerHTML = '';
+            products.forEach((product) => {
+                if (filter === 'all') {
+                    renderOneProduct(product)
                 } else {
-                    if (product.querySelector("#store-product").textContent.toLowerCase().includes(filter)) {
-                        product.style.display = "block"
-
-                    } else {
-                        product.style.display = "none"
-
+                    if (product.title.toLowerCase().includes(filter)) {
+                        renderOneProduct(product);
                     }
                 }
-            })
+            }
+            )
+
+
+            // console.log(filter)
+            // storeProducts.forEach((product) => {
+            //     if (filter === "all") {
+            //         product.style.display = "inline-block"
+            //     } else {
+            //         if (product.querySelector("#store-product").textContent.toLowerCase().includes(filter)) {
+            //             product.style.display = "inline-block"
+            //         } else {
+            //             product.style.display = "none"
+            //         }
+            //     }
+            // })
 
         })
     }
@@ -111,17 +122,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-// create a mouseover event
-// const cardList = document.querySelectorAll(".card");
-
-// cardList.forEach(card => {
-//     const img = card.querySelector("img");
-//     img.addEventListener("mouseover", (e) => {
-//         console.log(e)
-//         e.target.style.height = "500px";
-//         e.target.style.width = "500px";
-//     });
-// });
 
 const newsletterForm = document.getElementById('newsletter-form');
 newsletterForm.addEventListener('submit', function (event) {
