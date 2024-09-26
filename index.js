@@ -19,11 +19,9 @@ function renderOneProduct(product) {
 `
     card.querySelector('#addToCart').addEventListener('click', () => {
 
-        console.log('Item added to cart!');
         alert('Item added to cart!');
 
     });
-
 
     document.querySelector('#product-list').appendChild(card)
 }
@@ -31,7 +29,7 @@ function renderOneProduct(product) {
 // fetch request 
 
 function getAllProducts() {
-    let url = 'http://localhost:3000/menswear';
+    let url = 'https://server-2-4eqe.onrender.com/menswear';
 
     fetch(url)
         .then(res => res.json())
